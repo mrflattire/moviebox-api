@@ -5,7 +5,7 @@ description = "Unofficial Python wrapper for Moviebox websites and Android app -
 readme = "README.md"
 license="Unlicense"
 authors = [
-    { name = "smartwa", email = "smartwacaleb@gmail.com" }
+    { name = "mrflattire", email = "yourwebsiteasked@gmail.com" }
 ]
 requires-python = ">=3.12"
 classifiers = [
@@ -33,9 +33,9 @@ moviebox-v2 = "moviebox_api.v2.cli.interface:main"
 moviebox-v3 = "moviebox_api.v3.cli.interface:main"
 
 [project.urls]
-homepage = "https://github.com/Simatwa/moviebox-api"
-repository = "https://github.com/Simatwa/moviebox-api"
-documentation = "https://github.com/Simatwa/moviebox-api"
+homepage = "https://github.com/mrflattire/moviebox-api"
+repository = "https://github.com/mrflattire/moviebox-api"
+documentation = "https://github.com/mrflattire/moviebox-api"
 
 [project.optional-dependencies]
 cli = [
