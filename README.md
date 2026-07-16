@@ -5,14 +5,6 @@
 **Unofficial Python wrapper for Moviebox websites and Android app**  
 Search, discover, download, and stream movies & TV series with subtitles
 
-[![PyPI version](https://badge.fury.io/py/moviebox-api.svg)](https://pypi.org/project/moviebox-api)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/moviebox-api)](https://pypi.org/project/moviebox-api)
-![Coverage](https://raw.githubusercontent.com/Simatwa/moviebox-api/refs/heads/main/assets/coverage.svg)
-[![PyPI - License](https://img.shields.io/pypi/l/moviebox-api)](https://pypi.org/project/moviebox-api)
-[![Downloads](https://pepy.tech/badge/moviebox-api)](https://pepy.tech/project/moviebox-api)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-
-[Features](#features) • [Installation](#installation) • [Quick Start](#quick-start) • [Usage](#usage) • [Documentation](https://moviebox-api-docs.netlify.app/)
 
 </div>
 
@@ -115,9 +107,9 @@ async def main():
 asyncio.run(main())
 ```
 
-## [Usage](https://moviebox-api-docs.netlify.app/)
+## [Usage]
 
-This is just a brief usage information. For more details visit official docs - [https://moviebox-api-docs.netlify.app/](https://moviebox-api-docs.netlify.app/)
+This is just a brief usage information. For more details visit official docs - [coming soon]
 
 <details open>
 <summary><h3>Command Line Interface</h3></summary>
@@ -355,7 +347,7 @@ asyncio.run(main())
 
 ## Mirror Hosts
 
-h5.aoneroom.com has ~~[multiple mirror hosts](https://github.com/Simatwa/moviebox-api/issues/27)~~. To use a specific mirror:
+To use a specific mirror:
 
 ```sh
 # v1
@@ -373,20 +365,20 @@ moviebox v1 mirror-hosts
 
 ## Alternatives
 
-1. Movies - [fzmovies-api](https://github.com/Simatwa/fzmovies-api)
-2. TV-Series - [fzseries-api](https://github.com/Simatwa/fzseries-api)
+1. Movies -  
+2. TV-Series -
 
 
 ## Mirror Repositories
 
-- [Codeberg](https://codeberg.org/Simatwa/moviebox-api)
+
 
 ## Contributors
 
 <div align="center">
 
-<a href="https://github.com/Simatwa/moviebox-api/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Simatwa/moviebox-api" />
+<a href="https://github.com/mrflattire/moviebox-api/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mrflattire/moviebox-api" />
 </a>
 
 </div>
@@ -398,7 +390,7 @@ moviebox v1 mirror-hosts
 
 <div align=center>
 
-**Long live Moviebox spirit.**
+**The Moviebox Spirit Lives On.**
 </div>
 
 <div align="center">Made with ❤️ </div>
