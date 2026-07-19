@@ -1,6 +1,6 @@
 # export NO_MKDOCS_2_WARNING=1
 site_name: Moviebox-API Documentation
-repo_url: https://github.com/Simatwa/moviebox-api
+repo_url: https://github.com/mrflattire/moviebox-api
 repo_name: Moviebox-API
 edit_uri: edit/main/docs/
 
@@ -26,7 +26,9 @@ nav:
         - Movies: v3/movies.md
         - TV-Series: v3/tv_series.md
         - Commandline: v3/cli.md
-  
+
+  - Known Issues: known_issues.md
+
   - Misc: miscellaneous.md
 
 
@@ -45,7 +47,7 @@ markdown_extensions:
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
-    
+
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -54,7 +56,7 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  
+
   - pymdownx.inlinehilite
   - pymdownx.snippets:
       base_path: docs
@@ -63,7 +65,7 @@ markdown_extensions:
     # Content tabs
   - pymdownx.tabbed:
       alternate_style: true
-  
+
   - toc:
       permalink: true
 
@@ -84,7 +86,7 @@ theme:
 
     - scheme: default
       toggle:
-        icon: material/weather-night 
+        icon: material/weather-night
         name: Switch to dark mode
       primary: teal
 
@@ -119,9 +121,6 @@ extra:
   #homepage: https://example.com
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/Simatwa
+      link: https://github.com/mrflattire
 
-    - icon: fontawesome/solid/paper-plane
-      link: mailto:smartwacaleb@gmail.com
-
-copyright: Copyright &copy; 2025 - 2026 Simatwa
+copyright: Copyright &copy; 2026 mrflattire (continuation of original work by Simatwa)

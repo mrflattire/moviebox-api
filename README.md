@@ -2,15 +2,24 @@
 
 # moviebox-api
 
-**Unofficial Python wrapper for Moviebox websites and Android app**  
+**Unofficial Python wrapper for Moviebox websites and Android app**
 Search, discover, download, and stream movies & TV series with subtitles
-
 
 </div>
 
+## Version Status
+
+| Version | Status | Notes |
+|-|-|-|
+| `v1` | ✅ Working | Web scrape + partial REST, `h5.aoneroom.com` |
+| `v2` | ✅ Working | Pure REST, `h5-api.aoneroom.com` — recommended default |
+| `v3` | ⚠️ Broken | Auth works, but all search/download requests are rejected. See [KNOWN_ISSUES.md](./KNOWN_ISSUES.md). |
+
+**Use `v2` unless you have a specific reason not to.**
+
 ## Features
 
-* **Multi-Version Support** : Access multiple API versions (`v1`, `v2`, `v3`) for different provider services
+* **Multi-Version Support** : Access multiple API versions (`v1`, `v2`, `v3` — see status above) for different provider services
 * **Download Movies & TV Series** : High-quality downloads with multiple resolution options
 * **Subtitle Support** : Download subtitles in multiple languages
 * **Direct Streaming** : Stream via MPV or VLC without downloading (CLI only)
@@ -87,10 +96,9 @@ moviebox v2 download-series "Game of Thrones" -s 1 -e 1
 
 # Stream a movie (requires MPV)
 moviebox v2 download-movie "Avatar" --stream-via mpv
-
-# Stream with specific audio dub
-moviebox v3 download-series "Money Heist" --dub "English" -X vlc
 ```
+
+> v3 examples have been removed from this README — see [Version Status](#version-status) above.
 
 ### Python API
 
@@ -106,6 +114,11 @@ async def main():
 
 asyncio.run(main())
 ```
+
+> **Note:** the Python API examples below reference `moviebox_api.v1.MovieAuto`
+> and `moviebox_api.v1.cli.Downloader`. These haven't been re-verified against
+> the current v1 module surface as part of this testing round — worth
+> confirming they still exist/import cleanly before relying on them.
 
 ## [Usage]
 
@@ -126,14 +139,11 @@ moviebox v2 --help
 | `item-details` | Show details of a particular movie or TV series |
 | `mirror-hosts` | Discover available Moviebox mirror hosts |
 
-
-
 #### Downloading Movies
 
 **Basic usage:**
 ```sh
 moviebox v2 download-movie "Avatar"
-moviebox-v3 download-movie "avengers endgame" 
 ```
 
 **Common options:**
@@ -159,7 +169,6 @@ moviebox v2 download-movie "Avatar" --yes
 **Basic usage:**
 ```sh
 moviebox v2 download-series "Game of Thrones" -s 1 -e 1
-moviebox-v3 download-series "A Knight of the Seven Kingdoms"
 ```
 
 **Multiple episodes:**
@@ -212,9 +221,9 @@ Streaming requires the `moviebox-api[cli]` installation and MPV or VLC installed
 python -m moviebox_api v2 download-movie "Avatar"
 
 # Short forms
-movebox v2 download-movie "Avatar"
-movebox-v2 download-movie "Avatar"
-movebox-v1 download-movie "Avatar"
+moviebox v2 download-movie "Avatar"
+moviebox-v2 download-movie "Avatar"
+moviebox-v1 download-movie "Avatar"
 ```
 
 ### Episode Organization
@@ -363,16 +372,6 @@ Discover available mirrors:
 moviebox v1 mirror-hosts
 ```
 
-## Alternatives
-
-1. Movies -  
-2. TV-Series -
-
-
-## Mirror Repositories
-
-
-
 ## Contributors
 
 <div align="center">
@@ -383,14 +382,15 @@ moviebox v1 mirror-hosts
 
 </div>
 
+## Credits
+
+This project began as [moviebox-api](https://pypi.org/project/moviebox-api/)
+by Simatwa. The original GitHub repository was deleted; this repo is an
+independent continuation, maintained separately since.
+
 <h2 align="center"> Disclaimer </h2>
 
-> "All videos and pictures on MovieBox are from the Internet, and their copyrights belong to the original creators. We only provide webpage services and do not store, record, or upload any content."  
+> "All videos and pictures on MovieBox are from the Internet, and their copyrights belong to the original creators. We only provide webpage services and do not store, record, or upload any content."
 > - *moviebox.ph*
-
-<div align=center>
-
-**The Moviebox Spirit Lives On.**
-</div>
 
 <div align="center">Made with ❤️ </div>

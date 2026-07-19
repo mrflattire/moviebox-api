@@ -56,8 +56,15 @@ suject_types_name_value_map = SubjectType.map(ignore_names={"ALL", "TV_SERIES"})
 @click.group()
 @click.version_option(version=__version__)
 def moviebox_v3():
-    """Search and download movies/tv-series and their subtitles
-    (environment variable prefix: MOVIEBOX_V3)"""
+    '''Search and download movies/tv-series and their subtitles
+    (environment variable prefix: MOVIEBOX_V3)'''
+    import click as _click
+    _click.secho(
+        "⚠  v3 is currently non-functional — POST endpoints (search, "
+        "download) reject authentication as of 2026-07. Use 'v1' or "
+        "'v2' instead. See KNOWN_ISSUES.md for details.",
+        fg="yellow", err=True,
+    )
 
 
 @click.command(context_settings=command_context_settings)
