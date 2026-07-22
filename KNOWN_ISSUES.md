@@ -1,59 +1,37 @@
 # Known Issues
 
-## v3 — POST endpoints reject authentication (as of 2026-07)
+## v3 — no retry/refresh on transient auth errors (441)
 
-**Status:** v3 auth/token bootstrap works. All POST-based endpoints
-(`Search`, `SearchV2`, and by extension anything downstream of search:
-`ItemDetails`, `DownloadableFilesDetail`) currently fail with:
+**Status:** v3 is functional. Search → item details → resolve → download
+all work end-to-end and were verified across multiple separate test runs.
+
+During initial v0.0.1 testing, one run failed with:
 
 ```
 UnsuccessfulResponseError: Unsuccessful response received from server
 -STATUS 441 - BODY: '{"code":441,"reason":"UNAUTHORIZED","message":"miss token","metadata":{}}'
 ```
 
-### What we confirmed
+Every subsequent run (same code, same environment, spaced out over time)
+succeeded cleanly. This was a transient failure, not a stable backend
+break — the earlier assumption that v3's POST endpoints were reliably
+broken was wrong and has been reverted from this doc and from the CLI.
 
-- **GET requests work.** The homepage probe (`MovieBoxHttpClient._init_client`)
-  successfully harvests a runtime bearer token via the `x-user` response
-  header, exactly as designed.
-- **The token is being attached correctly.** `build_signed_headers()`
-  attaches `Authorization: Bearer {token}` on every request regardless of
-  path (`AUTH_FREE_PATHS` is empty, so the condition is never skipped).
-  This isn't a client-side bug in header construction.
-- **Both search implementations fail identically.** `Search` (`SEARCH_PATH`)
-  and `SearchV2` (`SEARCH_PATH_V2`) both return the exact same 441 error —
-  ruling out "one deprecated endpoint" as the explanation. It's not
-  endpoint-specific.
-- **The pattern is GET-succeeds / POST-fails**, not auth-fails-entirely.
-  Every POST call we tested was rejected the same way; every GET call
-  succeeded.
+### The real, narrower issue
 
-### What this likely means
+`RETRY_STATUS_CODES` in `v3/constants.py` is `{403, 407, 429, 500, 502,
+503, 504}` — **441 isn't included**, and v3's `MovieBoxHttpClient` has no
+equivalent to v1's `Session._fetch_user_info` retry-with-refresh loop for
+auth failures. So when a transient auth/token hiccup does occur on a POST
+request, v3 has no built-in way to recover from it — it just raises
+immediately, with no retry and no attempt to fetch a fresh token.
 
-The backend appears to have introduced a POST-specific auth requirement
-that didn't exist when this code was written — either:
+v1's `Session`, by contrast, explicitly retries and refreshes the token on
+401/403.
 
-1. POST endpoints now expect the token somewhere other than the
-   `Authorization: Bearer` header (a different header name, or embedded in
-   the JSON body), or
-2. A second-tier auth/handshake step now gates write-style (POST) access,
-   separate from the homepage-token-harvest that only unlocks read (GET)
-   access.
+### Possible future improvement
 
-We can't distinguish between these from black-box testing (search
-requests were the only POST endpoint tried). This needs real traffic
-captured from the current Android app (e.g. via mitmproxy/HTTP Toolkit
-against a rooted device or emulator, or a cert-pinning bypass) and a
-byte-for-byte diff against what `v3/http_client.py` + `v3/crypto.py`
-currently produce — not a quick patch.
-
-### Current recommendation
-
-**Use v1 or v2** — both fully verified end-to-end (search → item details →
-resolve → download) as of this testing round. v3's code is kept in the
-tree (the signing scheme, host-pool failover, and device-fingerprint
-spoofing are still legitimate, reusable engineering) but is non-functional
-until someone re-reverse-engineers the current POST auth requirement.
-
-If you have insight into this or want to help capture real traffic, please
-open an issue.
+Add 441 to a v3-specific retryable-status set (or a dedicated auth-retry
+path similar to v1's) so a one-off transient token issue doesn't
+immediately surface as a hard failure to the end user. Not urgent — this
+appears to be rare — but worth doing if it recurs with any frequency.

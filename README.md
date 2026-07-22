@@ -12,10 +12,8 @@ Search, discover, download, and stream movies & TV series with subtitles
 | Version | Status | Notes |
 |-|-|-|
 | `v1` | ✅ Working | Web scrape + partial REST, `h5.aoneroom.com` |
-| `v2` | ✅ Working | Pure REST, `h5-api.aoneroom.com` — recommended default |
-| `v3` | ⚠️ Broken | Auth works, but all search/download requests are rejected. See [KNOWN_ISSUES.md](./KNOWN_ISSUES.md). |
-
-**Use `v2` unless you have a specific reason not to.**
+| `v2` | ✅ Working | Pure REST, `h5-api.aoneroom.com` |
+| `v3` | ✅ Working | Signed native-app API, `api3-6.aoneroom.com`. Occasionally returns a transient auth error on the first request of a session with no automatic retry — if you hit this, just retry. See [KNOWN_ISSUES.md](./KNOWN_ISSUES.md). |
 
 ## Features
 
@@ -97,8 +95,6 @@ moviebox v2 download-series "Game of Thrones" -s 1 -e 1
 # Stream a movie (requires MPV)
 moviebox v2 download-movie "Avatar" --stream-via mpv
 ```
-
-> v3 examples have been removed from this README — see [Version Status](#version-status) above.
 
 ### Python API
 

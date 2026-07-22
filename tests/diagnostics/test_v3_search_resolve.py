@@ -82,7 +82,7 @@ async def main():
             best = resolve_media_file_to_be_downloaded(
                 CustomResolutionType.BEST, files_detail
             )
-            print(f"  ✓ Resolved best media file: {best.url[:80]}...")
+            print(f"  ✓ Resolved best media file: {str(best.url)[:80]}...")
         except Exception as e:
             print(f"  ✗ FAILED: {type(e).__name__}: {e}")
             traceback.print_exc()
