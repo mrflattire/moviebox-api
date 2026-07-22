@@ -5,7 +5,7 @@ description = "Unofficial Python wrapper for Moviebox websites and Android app -
 readme = "README.md"
 license="Unlicense"
 authors = [
-    { name = "mrflattire", email = "your-real-email@example.com" }
+    { name = "mrflattire", email = "yourwebsiteasked@gmail.com" }
 ]
 requires-python = ">=3.12"
 classifiers = [
